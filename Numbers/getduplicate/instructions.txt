@@ -1,0 +1,2 @@
+- given an array of integers from 1-100, testcase 10 digit array with a single duplicate
+- write function that finds the duplicate
