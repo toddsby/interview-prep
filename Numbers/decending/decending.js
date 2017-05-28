@@ -21,7 +21,36 @@ function descendingOrder(numbers) {
 };
 
 // alternative implementation descendingOrder
-// https://www.codewars.com/kata/reviews/55565cd093eb1235210000a0/groups/555cbef5207c41ebd600000f
+// https://www.codewars.com/kata/reviews/5485d20fd8325e250a00013e/groups/54875241ab4964a4c3000d50
+//
+
+/* 
+
+function descendingOrder(n){
+  return parseInt(String(n).split('').sort().reverse().join(''))
+}
+
+*/
+
+/*
+
+function descendingOrder(n){
+  //cast to string
+  var str = n.toString();
+
+  // alternative to Array.prototype.map.call
+  var temp = [];
+  for(var i = 0; i < str.length; i++ ) {
+    temp.push(str[i]);
+  };
+  // sort the array using native sort
+  var sorted = temp.sort(function(a,b){ return a-b; });
+  // high is always the last item, low is always the first
+  // reverse, concat string, and cast to integer
+  return Number(sorted.reverse().join(''));
+}
+
+ */
 
 // get element by id
 var el = document.getElementById('testcase');
