@@ -8,19 +8,20 @@ function speak(msg) {
 
 speak('i\'m alive!');
 
-// attach cameCase method to String prototype
-var disemvowel = function (str) {
-  return str.replace(/[aeiou]/gi, '');
+// naive doesn't account for edge cases like case eye vs eyE
+function isPalindrome(str) {
+  // cast string to lowercase -account for edge case, then to array
+  var temp = str.toLowerCase().split('');
+  // duplicate array
+  var og = temp.slice(0);
+  // if reversed arrays are equal string is a palindrome
+  return temp.toString() === og.reverse().toString();
 };
 
-// alternative https://www.codewars.com/kata/reviews/52fba700adcd10b182000980/groups/537e1b30989c70e20c000616
-/* 
-function disemvowel(str) {
-  var vowels = ['a', 'e', 'i', 'o', 'u'];
-  
-  return str.split('').filter(function(el) {
-    return vowels.indexOf(el.toLowerCase()) == -1;
-  }).join('');
+// alternative codementor mock interview (doesn't account for eyE)
+/*
+function isPalindrome(str) {
+  return str === str.split('').reverse().join('');
 }
 */
 
@@ -31,14 +32,23 @@ var simple = document.getElementById('simple').textContent;
 
 console.log('before: ', test);
 // camelCase content of element
-console.log('after: ', disemvowel(test));
+console.log('after: ', isPalindrome(test));
 
 console.log('simple:', simple);
 
-console.log('simple after: ', disemvowel(simple));
+console.log('simple after: ', isPalindrome(simple));
+
+console.log('eyE', isPalindrome('eyE'));
+console.log('not', isPalindrome('not'));
+//console.log('0_0 (: /-\\ :) 0–0', isPalindrome('0_0 (: /-\\ :) 0–0'));
 
 /* !! NOTES !!
 
 Q1: can you give me other examples of palindrome?
-A1:
+A1: eye, racecar, "0_0 (: /-\ :) 0–0", never odd or even
+
+Q2: what should happen with integers or white space?
+A1: remove them.
+
+// i should be able to compare original with reversed? essentially treating the string like an array.
  */
