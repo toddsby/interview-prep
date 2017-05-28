@@ -1,0 +1,4 @@
+- write a function to count the number of occurances of a given character in a given string
+- write a function that takes two parameters, a given character and a string
+- return how many times that character occurs
+- example occurances(l, "I will practice survival skills")
