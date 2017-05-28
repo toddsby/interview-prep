@@ -12,8 +12,8 @@ speak('i\'m alive!');
 String.prototype.camelCase = function () {
   return this.replace(/\w+/g, function(a){ 
     console.log('match: ', a);
-    return a.charAt(0).toUpperCase() + a.slice(1).toLowerCase()
-  })
+    return a.charAt(0).toUpperCase() + a.slice(1).toLowerCase();
+  }).replace(/\s/g, '');
 }
 
 // get element by id
@@ -29,7 +29,7 @@ console.log(simple);
 
 function removeSpace(str) {
   return str.replace(/\s+/g, function(match, offset, original){ 
-    return original.substr(0, offset);
+    return '';
   })
 }
 
