@@ -12,6 +12,72 @@ var flatMap = function(array, callback) {
   return [].concat.apply([], array.map(callback));
 };
 
+function someHelper(orders) {
+  var requestedColors = {};
+
+  for ( var i = 0; i < orders.length; i++ ) {  
+
+    for( var j = 0; j < orders[i].length; j++ ) {
+      if ( requestedColors[orders[i][j]] ) {
+        requestedColors[orders[i][j]] =  requestedColors[orders[i][j]] + 1;
+      } else {
+        requestedColors[orders[i][j]] = 1;
+      }
+    }
+
+  }
+  return requestedColors;
+}
+
+function codewarsTshirts(n, orders) {
+
+  // if order doesn't have every color 
+  // then we can't fulfill any orders
+  if ( n % 6 !== 0 ) return false;
+
+  // shirt options avaliable
+  var options = ['Red','Black','Blue','Purple','Orange','White'],
+  avaStock = {};
+  // all orders have equal number of shirts per order
+  // n % 6 = 0; then avalible equals n / 6
+  // ie 36 size of stock, 6 of each size
+  // total of each color
+  var avaliable = n / 6;
+
+  // build up hash of shirts per color in stock
+  for ( var oi = 0; oi < options.length; oi++ ) {
+    // build up hash of shirts per color
+    avaStock[options[oi]] = avaliable;
+  }
+
+  console.log('avaStock', avaStock);
+
+  var requested = someHelper(orders);
+  console.log('requested', requested);
+
+/* 
+  for ( var ri = 0; ri < requested.length; ri++ ) {
+    avaStock[requested[ri]] = avaStock[requested[ri]] - 1;
+  }
+*/
+
+  // compare requested with available 
+
+  for ( key in requested ) {
+    // if we have enough stock return true
+    // else return false
+    console.log(avaStock[key] > requested[key]);
+    if ( ! avaStock[key] > requested[key] ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+}
+
+/* 
+
 function codewarsTshirts(n, orders) {
   var shirtColors = ['Red','Black','Blue','Purple','Orange','White'].sort();
   console.log('shirtColors sorted', shirtColors);
@@ -22,9 +88,13 @@ function codewarsTshirts(n, orders) {
     if ( cur.indexOf(color) === -1 ) cur.push(color);
     return cur;
   },[]).sort();
-
   console.log('flat', flatten);
+  return true
+}
+*/
+
   /* 
+function codewarsTshirts(n,orders) {
   for( var i = 0; i < orders.length; i++ ) {
     var sorted = orders[i].sort();
     var filtered = shirtColors.filter(function(color){
@@ -32,12 +102,12 @@ function codewarsTshirts(n, orders) {
       return s === color;
     });
   }
-  */
   return true;
-};
+ }
+*/
 
 console.log( 'fulfilled?', codewarsTshirts(6,[["Red","Black"],["Red","Black"]]) );
-console.log( 'complex fulfilled?', codewarsTshirts(18,[["Black","Blue"],["Purple","Blue"],["Blue","White"],["White","Orange"],["White","Blue"],["Purple","White"],["White","Purple"],["White","Red"],["Blue","Purple"],["Orange","White"],["Black","Blue"],["Purple","Red"],["Blue","Red"],["Blue","White"],["Purple","White"],["Purple","Blue"],["Orange","Red"]]))
+//console.log( 'complex fulfilled?', codewarsTshirts(18,[["Black","Blue"],["Purple","Blue"],["Blue","White"],["White","Orange"],["White","Blue"],["Purple","White"],["White","Purple"],["White","Red"],["Blue","Purple"],["Orange","White"],["Black","Blue"],["Purple","Red"],["Blue","Red"],["Blue","White"],["Purple","White"],["Purple","Blue"],["Orange","Red"]]))
 
 
 // alternative implementation 
