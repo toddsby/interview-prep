@@ -12,18 +12,14 @@ var flatMap = function(array, callback) {
   return [].concat.apply([], array.map(callback));
 };
 
-function someHelper(orders, ava) {
-
+function someHelper(stock, orders) {
+  var parsed = Object.assign({},stock);
   for ( var i = 0; i < orders.length; i++ ) {  
-    console.log(ava[orders[i][0]]);
-    if ( ava[orders[i][0]] > 0 ) {
-      ava[orders[i][0]] =  ava[orders[i][0]] - 1;
-    } else if ( ava[orders[i][1]] > 0 ) {
-      ava[orders[i][0]] =  ava[orders[i][0]] - 1;
-    }
-
+    console.log('loop', i);
+    parsed[orders[i][0]] = parsed[orders[i][0]] - 1;
+    parsed[orders[i][1]] =  parsed[orders[i][1]] - 1;
   }
-  return ava;
+  return parsed;
 }
 
 function codewarsTshirts(n, orders) {
@@ -32,46 +28,39 @@ function codewarsTshirts(n, orders) {
   // then we can't fulfill any orders
   if ( n % 6 !== 0 ) return false;
 
-  // shirt options avaliable
-  var options = ['Red','Black','Blue','Purple','Orange','White'],
-  avaStock = {};
+  // shirt colors avaliable
+  var colors = ['Red','Black','Blue','Purple','Orange','White'],
+  stock = {};
   // all orders have equal number of shirts per order
   // n % 6 = 0; then avalible equals n / 6
   // ie 36 size of stock, 6 of each size
   // total of each color
-  var avaliable = n / 6;
+  var s = n / 6;
 
   // build up hash of shirts per color in stock
-  for ( var oi = 0; oi < options.length; oi++ ) {
+  for ( var i = 0; i < colors.length; i++ ) {
     // build up hash of shirts per color
-    avaStock[options[oi]] = avaliable;
+    stock[colors[i]] = s;
   }
 
-  console.log('avaStock', avaStock);
-
-  var requested = someHelper(orders, avaStock);
+  console.log('stock', stock);
+  var requested;
+  requested = someHelper(stock, orders);
   console.log('requested', requested);
 
 /* 
   for ( var ri = 0; ri < requested.length; ri++ ) {
-    avaStock[requested[ri]] = avaStock[requested[ri]] - 1;
+    stock[requested[ri]] = stock[requested[ri]] - 1;
   }
 */
 
   // compare requested with available 
-
   for ( key in requested ) {
     // if we have enough stock return true
     // else return false
-    console.log(avaStock[key] > requested[key]);
-    if ( ! avaStock[key] > requested[key] ) {
-      return true;
-    } else {
-      return false;
-    }
+    if ( requested[key] < 0 ) return false;
   }
-
-}
+};
 
 /* 
 
