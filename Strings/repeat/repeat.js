@@ -29,6 +29,11 @@ String.prototype.repeatify = String.prototype.repeatify || function( i ) {
   return this.repeat(i);
 };
 
+String.prototype.repeatify = function ( n ) {
+  console.log('with array');
+  return new Array( n + 1 ).join( this );
+}
+
 // get element by id
 var el = document.getElementById('testcase').textContent;
 // get simple element by id
