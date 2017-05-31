@@ -38,16 +38,42 @@ function someHelper(stock, orders) {
   }
 
   console.log('reduced stacks',stacks);
+  /*
+  var il = 0,
+  ir = 0;
+  while( il < stacks.left.length && ir < stacks.right.length ) {
+    if (parsed[stacks.left[il]] < parsed[stacks.right[ir]]) {
+      parsed[stacks.left[il++]] - 1;
+    } else {
+      parsed[stacks.right[ir++] - 1]
+    }
+  }
 
+  while( il < stacks.left.length ) {
+    parsed[stacks.left[il++]] - 1;
+  }
+
+  while( ir < stacks.right.length ) {
+    parsed[stacks.right[ir++]] - 1;
+  }
+  */
+  var il = 0,
+  ir = 0;
   for ( var i = 0; i < stacks.left.length; i++ ) {  
     console.log('loop', i);
     if( parsed[stacks.left[i]] > 0 ) {
+      il++;
+      console.log(stacks.left[i]);
       parsed[stacks.left[i]] = parsed[stacks.left[i]] - 1;
       continue;
     } else {
+      ir++;
+      console.log(stacks.right[i]);
       parsed[stacks.right[i]] = parsed[stacks.right[i]] - 1;
     }
   }
+  console.log('il', il);
+  console.log('ir', ir);
   console.log('helper parsed', parsed);
   return parsed;
 }
@@ -72,10 +98,9 @@ function codewarsTshirts(n, orders) {
     // build up hash of shirts per color
     stock[colors[i]] = s;
   }
-
+  console.log('orders', orders);
   console.log('stock', stock);
-  var requested;
-  requested = someHelper(stock, orders);
+  var requested = someHelper(stock, orders);
   console.log('requested', requested);
 
   var result;
