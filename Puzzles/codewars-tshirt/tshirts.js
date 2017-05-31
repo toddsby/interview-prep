@@ -12,15 +12,41 @@ var flatMap = function(array, callback) {
   return [].concat.apply([], array.map(callback));
 };
 
+function twostacks(orders) {
+  var a = [], 
+  b = [];
+  for( var i = 0; i < orders.length; i++ ) {
+    a.push(orders[i][0]);
+    b.push(orders[i][1]);
+  }
+  return {
+    left:a.sort(),
+    right:b.sort()
+  }
+}
+
 function someHelper(stock, orders) {
-  var parsed = Object.assign({},stock);
-  for ( var i = 0; i < orders.length; i++ ) {  
+  var parsed = Object.assign({},stock),
+  stacks = twostacks(orders),
+  stack = [];
+
+  for (var j = 0; j < stacks.left.length; j++) {
+
+    if ( stacks.left[j] === stacks.right[j] ) {
+      stacks.left.splice( j, 1 );
+    }
+
+  }
+
+  console.log('reduced stacks',stacks);
+
+  for ( var i = 0; i < stacks.left.length; i++ ) {  
     console.log('loop', i);
-    if( parsed[orders[i][0]] > 0 ) {
-      parsed[orders[i][0]] = parsed[orders[i][0]] - 1;
+    if( parsed[stacks.left[i]] > 0 ) {
+      parsed[stacks.left[i]] = parsed[stacks.left[i]] - 1;
       continue;
     } else {
-      parsed[orders[i][1]] =  parsed[orders[i][1]] - 1;
+      parsed[stacks.right[i]] =  parsed[stacks.right[i]] - 1;
     }
   }
   return parsed;
@@ -51,12 +77,6 @@ function codewarsTshirts(n, orders) {
   var requested;
   requested = someHelper(stock, orders);
   console.log('requested', requested);
-
-/* 
-  for ( var ri = 0; ri < requested.length; ri++ ) {
-    stock[requested[ri]] = stock[requested[ri]] - 1;
-  }
-*/
 
   var result;
 
@@ -100,9 +120,11 @@ function codewarsTshirts(n,orders) {
  }
 */
 
-console.log( 'fulfilled?', codewarsTshirts(6,[["Red","Black"],["Red","Black"]]) );
-console.log( 'complex fulfilled?', codewarsTshirts(18,[["Black","Blue"],["Purple","Blue"],["Blue","White"],["White","Orange"],["White","Blue"],["Purple","White"],["White","Purple"],["White","Red"],["Blue","Purple"],["Orange","White"],["Black","Blue"],["Purple","Red"],["Blue","Red"],["Blue","White"],["Purple","White"],["Purple","Blue"],["Orange","Red"]]))
-console.log( 'should be false', codewarsTshirts(6,[["Red","Black"],["Red","Black"],["Red","Black"]]) );
+console.log( 'true', codewarsTshirts(6,[["Red","Black"],["Red","Black"]]) );
+console.log( 'true', codewarsTshirts(24,[]) );
+console.log( 'true', codewarsTshirts(18,[["Black","Blue"],["Purple","Blue"],["Blue","White"],["White","Orange"],["White","Blue"],["Purple","White"],["White","Purple"],["White","Red"],["Blue","Purple"],["Orange","White"],["Black","Blue"],["Purple","Red"],["Blue","Red"],["Blue","White"],["Purple","White"],["Purple","Blue"],["Orange","Red"]]) );
+console.log( 'false', codewarsTshirts(6,[["Red","Black"],["Red","Black"],["Red","Black"]]) );
+console.log( 'true', codewarsTshirts(6,[["White","Purple"],["Purple","Blue"],["Blue","Orange"],["Orange","Red"],["Red","Black"],["Black","White"]]) )
 
 // alternative implementation 
 // https://www.codewars.com/kata/reviews/5485d20fd8325e250a00013e/groups/54875241ab4964a4c3000d50
