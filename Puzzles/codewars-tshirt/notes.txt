@@ -1,0 +1,131 @@
+// orders
+{
+  black: 1
+  red: 1
+}
+
+[red,black],
+
+// for each order in orders 
+
+// first pass
+
+( avaStock[orders[i][j]] > 0 ) avaStock[orders[i][j]] = avaStock[orders[i][j]] - 1;
+
+ ELSE
+
+
+
+requestColors[orders[i][j]]
+
+if ( orders[i][j] < avaStock[requestedColors[i]] )
+
+red 
+{ 
+  black: 1,
+  red: 0,
+}
+
+
+// requested
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+requested: {
+  red: 1,
+  blue: 2,
+  green: 3
+}
+
+available: {
+  red: 2,
+  blue: 2,
+  green: 2
+}
+
+// first pass
+
+1 > 2 FALSE
+
+// second pass
+
+2 > 2 FALSE
+
+// third pass
+
+3 > 2 TRUE 
+
+
+
+// done
+
+// also have to account for two options in requested colors
+
+// really only have to compare to one of those colors, hmmmm.
+does it matter?
+
+make a list of all colors requested
+
+[
+
+['black', 'blue'],
+['orange', 'blue'],
+['white', 'blue'],
+['red', 'blue'],
+['blue', 'orange'],
+['purple','blue']
+
+]
+
+SHOULD EQUAL TRUE CAN FULFUILL 
+however if we swap one value, it will return false
+
+[
+
+['black', 'blue'],
+['orange', 'blue'],
+['white', 'blue'],
+['blue', 'red'],
+['blue', 'orange'],
+['purple','blue']
+
+]
+
+WILL RETURN FALSE IF PULL FIRST VALUE ONLY
+
+sort and then pull first value 

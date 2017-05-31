@@ -12,21 +12,18 @@ var flatMap = function(array, callback) {
   return [].concat.apply([], array.map(callback));
 };
 
-function someHelper(orders) {
-  var requestedColors = {};
+function someHelper(orders, ava) {
 
   for ( var i = 0; i < orders.length; i++ ) {  
-
-    for( var j = 0; j < orders[i].length; j++ ) {
-      if ( requestedColors[orders[i][j]] ) {
-        requestedColors[orders[i][j]] =  requestedColors[orders[i][j]] + 1;
-      } else {
-        requestedColors[orders[i][j]] = 1;
-      }
+    console.log(ava[orders[i][0]]);
+    if ( ava[orders[i][0]] > 0 ) {
+      ava[orders[i][0]] =  ava[orders[i][0]] - 1;
+    } else if ( ava[orders[i][1]] > 0 ) {
+      ava[orders[i][0]] =  ava[orders[i][0]] - 1;
     }
 
   }
-  return requestedColors;
+  return ava;
 }
 
 function codewarsTshirts(n, orders) {
@@ -52,7 +49,7 @@ function codewarsTshirts(n, orders) {
 
   console.log('avaStock', avaStock);
 
-  var requested = someHelper(orders);
+  var requested = someHelper(orders, avaStock);
   console.log('requested', requested);
 
 /* 

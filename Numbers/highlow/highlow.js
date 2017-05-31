@@ -21,10 +21,12 @@ function highAndLow(numbers) {
 // alternative implementation highAndLow
 // https://www.codewars.com/kata/reviews/55565cd093eb1235210000a0/groups/555cbef5207c41ebd600000f
 
+/*
 function highAndLow(numbers){
   numbers = numbers.split(' ').map(Number);
   return Math.max.apply(0, numbers) + ' ' + Math.min.apply(0, numbers);
 }
+*/
 
 // get element by id
 var el = document.getElementById('testcase');
