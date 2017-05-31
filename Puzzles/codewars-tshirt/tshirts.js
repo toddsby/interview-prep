@@ -16,8 +16,12 @@ function someHelper(stock, orders) {
   var parsed = Object.assign({},stock);
   for ( var i = 0; i < orders.length; i++ ) {  
     console.log('loop', i);
-    parsed[orders[i][0]] = parsed[orders[i][0]] - 1;
-    parsed[orders[i][1]] =  parsed[orders[i][1]] - 1;
+    if( parsed[orders[i][0]] > 0 ) {
+      parsed[orders[i][0]] = parsed[orders[i][0]] - 1;
+      continue;
+    } else {
+      parsed[orders[i][1]] =  parsed[orders[i][1]] - 1;
+    }
   }
   return parsed;
 }
@@ -54,12 +58,16 @@ function codewarsTshirts(n, orders) {
   }
 */
 
+  var result;
+
   // compare requested with available 
   for ( key in requested ) {
-    // if we have enough stock return true
-    // else return false
-    if ( requested[key] < 0 ) return false;
+    if ( requested[key] < 0 ) {
+      result = false;
+      break;
+    }
   }
+  return (result === undefined) ? true : false;
 };
 
 /* 
@@ -93,8 +101,8 @@ function codewarsTshirts(n,orders) {
 */
 
 console.log( 'fulfilled?', codewarsTshirts(6,[["Red","Black"],["Red","Black"]]) );
-//console.log( 'complex fulfilled?', codewarsTshirts(18,[["Black","Blue"],["Purple","Blue"],["Blue","White"],["White","Orange"],["White","Blue"],["Purple","White"],["White","Purple"],["White","Red"],["Blue","Purple"],["Orange","White"],["Black","Blue"],["Purple","Red"],["Blue","Red"],["Blue","White"],["Purple","White"],["Purple","Blue"],["Orange","Red"]]))
-
+console.log( 'complex fulfilled?', codewarsTshirts(18,[["Black","Blue"],["Purple","Blue"],["Blue","White"],["White","Orange"],["White","Blue"],["Purple","White"],["White","Purple"],["White","Red"],["Blue","Purple"],["Orange","White"],["Black","Blue"],["Purple","Red"],["Blue","Red"],["Blue","White"],["Purple","White"],["Purple","Blue"],["Orange","Red"]]))
+console.log( 'should be false', codewarsTshirts(6,[["Red","Black"],["Red","Black"],["Red","Black"]]) );
 
 // alternative implementation 
 // https://www.codewars.com/kata/reviews/5485d20fd8325e250a00013e/groups/54875241ab4964a4c3000d50
