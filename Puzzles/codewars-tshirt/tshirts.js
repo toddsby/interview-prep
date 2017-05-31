@@ -8,10 +8,6 @@ function speak(msg) {
 
 speak('i\'m alive!');
 
-var flatMap = function(array, callback) {
-  return [].concat.apply([], array.map(callback));
-};
-
 function twostacks(orders) {
   var a = [], 
   b = [];
@@ -26,6 +22,9 @@ function twostacks(orders) {
 }
 
 function someHelper(stock, orders) {
+  // base case no orders
+  if (orders.length === 0) return parsed;
+
   var parsed = Object.assign({},stock),
   stacks = twostacks(orders),
   stack = [];
@@ -46,9 +45,10 @@ function someHelper(stock, orders) {
       parsed[stacks.left[i]] = parsed[stacks.left[i]] - 1;
       continue;
     } else {
-      parsed[stacks.right[i]] =  parsed[stacks.right[i]] - 1;
+      parsed[stacks.right[i]] = parsed[stacks.right[i]] - 1;
     }
   }
+  console.log('helper parsed', parsed);
   return parsed;
 }
 
@@ -125,7 +125,7 @@ console.log( 'true', codewarsTshirts(24,[]) );
 console.log( 'true', codewarsTshirts(18,[["Black","Blue"],["Purple","Blue"],["Blue","White"],["White","Orange"],["White","Blue"],["Purple","White"],["White","Purple"],["White","Red"],["Blue","Purple"],["Orange","White"],["Black","Blue"],["Purple","Red"],["Blue","Red"],["Blue","White"],["Purple","White"],["Purple","Blue"],["Orange","Red"]]) );
 console.log( 'false', codewarsTshirts(6,[["Red","Black"],["Red","Black"],["Red","Black"]]) );
 console.log( 'true', codewarsTshirts(6,[["White","Purple"],["Purple","Blue"],["Blue","Orange"],["Orange","Red"],["Red","Black"],["Black","White"]]) )
-
+console.log( 'false', codewarsTshirts(6,[["Black","White"],["Black","Purple"],["Blue","Black"],["Orange","Black"],["Orange","White"],["Purple","Red"],["Orange","Black"]] ) );
 // alternative implementation 
 // https://www.codewars.com/kata/reviews/5485d20fd8325e250a00013e/groups/54875241ab4964a4c3000d50
 
