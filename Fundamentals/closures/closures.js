@@ -25,6 +25,6 @@ for (var i = 0; i < 5; i++) {
 for (var i = 0; i < 5; i++) {
   // enclose in within a function and pass value
   (function (x){
-  setTimeout(function() { console.log('new output', x); }, x * 1000 );
+    setTimeout(function() { console.log('new output', x); }, x * 1000 );
   })(i);
 };
