@@ -16,34 +16,65 @@ For example: if str is "arrb6???4xxbl5???eee5" then your program should return t
 
  */
 
-function questionsMarks(str) { 
+function questionsMarks(str) {
   var arr = str.split(''),
   qi = 0,
-  firstNumber;
+  prevNum = 0,
+  pattern = false;
 
   for( var i = 0; i < arr.length; i++ ) {
-    // base case true
-    if ( !isNaN(arr[i]) || arr[i] === '?') {
-      console.log('yup');
-      if( arr[i] === '?') {
-        if ( qi >= 3 ) {  // optimizaton finish before the loop has iterated over entire array because we now it's true
-          break; 
+    if ( !isNaN(arr[i])) {
+      console.log('test', prevNum + Number(arr[i]));
+      if ( prevNum + Number(arr[i]) === 10 ) {
+        if ( qi !== 3 ) {
+          return false;
         }
-        qi++;
+        pattern = true; 
       }
-    } else {
-      // reset question mark counter if not a number 
+      prevNum = Number(arr[i]);
       qi = 0;
+    } else if ( arr[i] === '?') {
+      qi++;
     }
   }
-
-  if (qi >= 3) {
-    return true;
-  } else {
-    return false;
-  }
-};
+  return pattern;
+}
 
 console.log('1stcase true', questionsMarks('acc?7??sss?3rr1??????5'));
 console.log('2ndcase false', questionsMarks('aa6?9'));
 console.log('3rdcase false', questionsMarks('acc?7?sss?3rr1??5'));
+console.log('4thcase true', questionsMarks('acc?6?sss?33r?r??7'));
+console.log('5thcase true', questionsMarks('arrb6???4xxbl5???eee5'));
+
+
+/*
+
+function questionMarks(str) {
+  qnum = 0,
+  dig = 0,
+  has_10 = false;
+
+  str.split('').forEach(function(n){
+  
+  })
+
+}
+
+def QuestionsMarks(s):
+  qnum = 0
+  dig = 0
+  has_10 = False
+  for ch in s:
+    if ch.isdigit():
+      if int(ch) + dig == 10:
+        if qnum != 3:
+          return 'false'
+        has_10 = True
+      dig = int(ch)
+      qnum = 0
+    elif ch == '?':
+      qnum += 1
+  return 'true' if has_10 else 'false'
+
+
+ */
